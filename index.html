@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CONACAM 2026 · Congreso Nacional de Educación</title>
 <meta name="description" content="Congreso Nacional de Educación CONACAM 2026 — Formar para la PAZ. 30 de septiembre al 2 de octubre de 2026, Acapulco, Guerrero." />
+<link rel="icon" href="assets/img/logo.png" type="image/png" />
+<meta property="og:title" content="CONACAM 2026 · Congreso Nacional de Educación" />
+<meta property="og:description" content="Formar para la PAZ — 30 de septiembre al 2 de octubre de 2026, Acapulco, Guerrero." />
+<meta property="og:image" content="assets/img/wordmark.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -18,15 +22,18 @@
     --teal:#3fe0c5;
     --white:#f4f7fb;
     --muted:#9fb0c9;
+    --ink:#101826;
+    --ink-muted:#5b6b82;
+    --paper:#faf6f1;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   html,body{
-    height:100%;
     background:var(--bg-0);
     color:var(--white);
     font-family:'Manrope',sans-serif;
-    overflow:hidden;
   }
+  img{display:block; max-width:100%;}
   .player{
     position:relative;
     width:100vw;
@@ -110,16 +117,6 @@
   }
   @keyframes draw{ to{ stroke-dashoffset:0; } }
 
-  .logo-type{
-    font-family:'Sora',sans-serif;
-    font-weight:800;
-    font-size:clamp(46px,9vw,92px);
-    letter-spacing:.02em;
-    background:linear-gradient(90deg,var(--white),var(--teal) 55%,var(--gold-soft));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
   .tagline{
     font-size:clamp(14px,2vw,20px);
     color:var(--muted);
@@ -272,28 +269,171 @@
   }
   .ctrl-btn:hover{background:rgba(255,255,255,.15);}
 
-  .brand-mark{
-    position:absolute;
-    top:24px; left:28px;
-    font-family:'Sora',sans-serif;
-    font-weight:800;
-    letter-spacing:.08em;
-    font-size:13px;
-    color:var(--muted);
-  }
-  .brand-mark b{color:var(--white);}
-
   @media (max-width:560px){
     .grid{grid-template-columns:1fr;}
     .card{padding:22px 26px;}
   }
+
+  /* ===== NAV ===== */
+  .site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    transition:background .35s ease, backdrop-filter .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  .site-nav.scrolled{
+    background:rgba(6,10,20,.72);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 rgba(255,255,255,.06);
+    padding:10px 28px;
+  }
+  .site-nav .nav-logo img{height:30px; width:auto;}
+  .nav-links{display:flex; align-items:center; gap:28px;}
+  .nav-links a{
+    color:var(--white); text-decoration:none; font-weight:600; font-size:14px;
+    opacity:.82; transition:opacity .2s;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    font-weight:800; font-size:13px; letter-spacing:.03em;
+    color:#08131f; background:linear-gradient(90deg,var(--gold-soft),var(--gold));
+    padding:10px 20px; border-radius:999px; text-decoration:none;
+  }
+  @media (max-width:720px){
+    .nav-links a:not(.nav-cta){display:none;}
+  }
+
+  /* ===== shared section utilities ===== */
+  .band{ position:relative; padding:120px 24px; }
+  .band-inner{ position:relative; z-index:2; max-width:1080px; margin:0 auto; }
+  .center{ text-align:center; }
+  .reveal{ opacity:0; transform:translateY(34px); transition:opacity .8s cubic-bezier(.22,.9,.32,1), transform .8s cubic-bezier(.22,.9,.32,1); }
+  .reveal.in-view{ opacity:1; transform:none; }
+
+  /* ===== THEME BAND (image bg) ===== */
+  .band-theme{
+    background:
+      linear-gradient(180deg, rgba(6,10,20,.94), rgba(9,14,26,.88) 55%, rgba(6,10,20,.97)),
+      url('assets/img/hero-illustration.jpg') center 60% / cover no-repeat;
+  }
+  .band-theme .band-title{
+    font-family:'Sora',sans-serif; font-weight:800;
+    font-size:clamp(30px,5vw,52px); line-height:1.12;
+    color:var(--gold); text-shadow:0 0 40px rgba(242,177,52,.3);
+    margin:14px 0 18px;
+  }
+  .band-theme p.lead{
+    max-width:640px; margin:0 auto; color:var(--white); opacity:.86;
+    font-size:clamp(15px,2vw,19px);
+  }
+  .pill-row{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:40px;
+  }
+  .pill{
+    display:flex; align-items:center; gap:10px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(6px);
+    border-radius:999px;
+    padding:12px 22px;
+    font-weight:700;
+    font-size:14px;
+  }
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);}
+  .pill.gold .dot{background:var(--gold);}
+  .pill span.muted{color:var(--muted); font-weight:500; margin-left:2px;}
+
+  /* ===== PROGRAM (light band) ===== */
+  .band-light{ background:var(--paper); color:var(--ink); padding:110px 24px; }
+  .band-light .eyebrow{color:#1f8f7a;}
+  .band-light h2{
+    font-family:'Sora',sans-serif; font-weight:800;
+    font-size:clamp(28px,4.4vw,44px);
+    margin:12px 0 12px; color:var(--ink);
+  }
+  .band-light p.lead{ color:var(--ink-muted); max-width:600px; margin:0 auto; font-size:16px; }
+
+  .program-grid{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .program-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(16,24,38,.08);
+    transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .program-card:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(16,24,38,.16); }
+  .program-card .pc-img{ height:170px; overflow:hidden; }
+  .program-card .pc-img img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .program-card:hover .pc-img img{ transform:scale(1.08); }
+  .program-card .pc-body{ padding:20px 20px 24px; }
+  .program-card h3{ font-family:'Sora',sans-serif; font-size:16.5px; margin-bottom:6px; color:var(--ink); }
+  .program-card p{ font-size:13.5px; color:var(--ink-muted); line-height:1.45; }
+
+  @media (max-width:920px){ .program-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .program-grid{grid-template-columns:1fr;} }
+
+  /* ===== COMMUNITY (photo band) ===== */
+  .band-photo{
+    position:relative;
+    min-height:560px;
+    display:flex; align-items:flex-end;
+    background:url('assets/img/comunidad.jpg') center 25% / cover no-repeat;
+    padding:60px 24px 64px;
+  }
+  .band-photo::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(6,10,20,.92) 10%, rgba(6,10,20,.55) 55%, rgba(6,10,20,.15) 100%);
+  }
+  .band-photo .band-inner{ width:100%; }
+  .band-photo .audience{ justify-content:flex-start; margin:14px 0 16px; }
+  .band-photo p.lead{ max-width:560px; color:var(--white); opacity:.85; font-size:15.5px; }
+
+  /* ===== FOOTER CTA ===== */
+  .band-footer{
+    text-align:center;
+    padding:110px 24px 40px;
+    background:linear-gradient(160deg, var(--bg-0), var(--navy) 60%, var(--bg-1));
+  }
+  .band-footer .wordmark-img{ height:52px; width:auto; margin:0 auto 30px; }
+  .band-footer .cta-btn{ display:inline-block; text-decoration:none; }
+  .band-footer .site{ display:block; margin-top:18px; text-decoration:none; }
+  .band-footer .social{ justify-content:center; margin-top:14px; }
+  .band-footer .social a{ color:var(--muted); text-decoration:none; font-weight:600; }
+  .band-footer .social a:hover{ color:var(--teal); }
+  .fine-print{ margin-top:56px; color:var(--muted); opacity:.6; font-size:12px; }
+
+  .scroll-cue{
+    position:absolute; left:50%; bottom:74px; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    color:var(--muted); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    animation:bob 2.2s ease-in-out infinite;
+    z-index:3;
+  }
+  .scroll-cue svg{width:16px;height:16px;}
+  @keyframes bob{ 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,8px);} }
 </style>
 </head>
 <body>
 
-<div class="player" id="player">
+<nav class="site-nav" id="siteNav">
+  <a class="nav-logo" href="#hero" aria-label="CONACAM inicio">
+    <img src="assets/img/wordmark.png" alt="CONAED · 4to Congreso Nacional de Educación · CONACAM" />
+  </a>
+  <div class="nav-links">
+    <a href="#tema">Tema</a>
+    <a href="#programa">Programa</a>
+    <a href="#comunidad">Comunidad</a>
+    <a class="nav-cta" href="https://www.conacamcongreso.com/" target="_blank" rel="noopener">Regístrate</a>
+  </div>
+</nav>
+
+<div class="player" id="hero">
   <div class="particles" id="particles"></div>
-  <div class="brand-mark">CONACAM <b>2026</b></div>
 
   <div class="stage">
 
@@ -303,7 +443,7 @@
           <path d="M10,60 C25,40 40,55 50,45 C60,35 75,20 90,25 C78,35 70,45 68,55 C66,68 55,78 40,75 C50,68 55,60 52,52 C45,58 30,65 10,60 Z"/>
         </svg>
       </div>
-      <div class="logo-type">CONACAM</div>
+      <img class="hero-wordmark" src="assets/img/wordmark.png" alt="CONAED · 4to Congreso Nacional de Educación" style="width:min(560px,80vw); margin:0 auto;" />
       <div class="tagline">Congreso Nacional de Educación · 2026</div>
     </section>
 
@@ -358,7 +498,87 @@
     <button class="ctrl-btn" id="playPause" aria-label="Pausar / reproducir">❚❚</button>
     <button class="ctrl-btn" id="restart" aria-label="Reiniciar">↺</button>
   </div>
+
+  <a class="scroll-cue" href="#tema" aria-label="Desplázate para conocer más">
+    Descubre más
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </a>
 </div>
+
+<section class="band band-theme" id="tema">
+  <div class="band-inner center reveal">
+    <div class="eyebrow">Tema central</div>
+    <div class="band-title">Formar para la PAZ</div>
+    <p class="lead">Responsabilidad y movimientos sociales, educación y valores. Un espacio de encuentro nacional e internacional para docentes, investigadores y directivos comprometidos con una educación que construye paz.</p>
+    <div class="pill-row">
+      <div class="pill"><span class="dot"></span> 30 sept — 2 oct 2026</div>
+      <div class="pill gold"><span class="dot"></span> Hotel Palacio Mundo Imperial <span class="muted">· Acapulco, Gro.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-light" id="programa">
+  <div class="band-inner center reveal">
+    <div class="eyebrow">Programa académico</div>
+    <h2>Cuatro días de aprendizaje y comunidad</h2>
+    <p class="lead">Conferencias magistrales, talleres y ponencias impartidos por especialistas nacionales e internacionales, en 7 líneas temáticas.</p>
+  </div>
+  <div class="band-inner program-grid">
+    <div class="program-card reveal">
+      <div class="pc-img"><img src="assets/img/conferencias.jpg" alt="Conferencista magistral en CONAED" loading="lazy" /></div>
+      <div class="pc-body">
+        <h3>Conferencias magistrales</h3>
+        <p>Especialistas nacionales e internacionales en educación y cultura de paz.</p>
+      </div>
+    </div>
+    <div class="program-card reveal">
+      <div class="pc-img"><img src="assets/img/talleres.jpg" alt="Taller especializado en CONAED" loading="lazy" /></div>
+      <div class="pc-body">
+        <h3>Talleres especializados</h3>
+        <p>Impartidos por los Centros de Actualización del Magisterio.</p>
+      </div>
+    </div>
+    <div class="program-card reveal">
+      <div class="pc-img"><img src="assets/img/ponencias.jpg" alt="Ponencia académica en CONAED" loading="lazy" /></div>
+      <div class="pc-body">
+        <h3>7 líneas temáticas</h3>
+        <p>Ponencias académicas de investigación educativa.</p>
+      </div>
+    </div>
+    <div class="program-card reveal">
+      <div class="pc-img"><img src="assets/img/educacion.jpg" alt="Participantes de CONAED trabajando" loading="lazy" /></div>
+      <div class="pc-body">
+        <h3>Networking educativo</h3>
+        <p>Espacios de encuentro y colaboración con la comunidad docente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-photo" id="comunidad">
+  <div class="band-inner reveal">
+    <div class="eyebrow">Dirigido a</div>
+    <div class="audience">
+      <span>Docentes</span>
+      <span>Investigadores</span>
+      <span>Estudiantes</span>
+      <span>Directivos educativos</span>
+    </div>
+    <p class="lead">Súmate a la comunidad que impulsa la actualización docente y la educación para la paz en México.</p>
+  </div>
+</section>
+
+<section class="band band-footer" id="registro">
+  <img class="wordmark-img reveal" src="assets/img/wordmark.png" alt="CONAED · 4to Congreso Nacional de Educación" />
+  <div class="eyebrow reveal">Cupo limitado</div>
+  <a class="cta-btn reveal" href="https://www.conacamcongreso.com/" target="_blank" rel="noopener">REGÍSTRATE HOY</a>
+  <a class="site reveal" href="https://www.conacamcongreso.com/" target="_blank" rel="noopener">www.conacamcongreso.com</a>
+  <div class="social reveal">
+    <a href="https://www.facebook.com/ConacamNacional" target="_blank" rel="noopener">Facebook @ConacamNacional</a>
+    <a href="https://x.com/CONACAM32" target="_blank" rel="noopener">X @CONACAM32</a>
+  </div>
+  <div class="fine-print">© 2026 CONACAM · Consejo Nacional de Centros de Actualización del Magisterio</div>
+</section>
 
 <script>
 (function(){
@@ -458,6 +678,34 @@
   }
 
   start();
+})();
+
+// nav background on scroll
+(function(){
+  var nav = document.getElementById('siteNav');
+  function onScroll(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// reveal-on-scroll for content bands
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in-view'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
